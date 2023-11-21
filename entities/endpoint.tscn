@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://chfnplgiaymw2"]
+
+[ext_resource type="Script" path="res://entities/endpoint.gd" id="1_gnhyj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ih5u3"]
+radius = 15.0
+
+[node name="Endpoint" type="CollisionShape2D"]
+position = Vector2(75, 80)
+shape = SubResource("CircleShape2D_ih5u3")
+script = ExtResource("1_gnhyj")

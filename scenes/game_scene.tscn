@@ -1,0 +1,88 @@
+[gd_scene load_steps=7 format=3 uid="uid://bw0tpgb7sg8ye"]
+
+[ext_resource type="Script" path="res://scenes/game_scene.gd" id="1_r8tj6"]
+[ext_resource type="PackedScene" uid="uid://bgu56l5reo6gf" path="res://entities/player_new.tscn" id="1_xsejp"]
+[ext_resource type="PackedScene" uid="uid://begr2phx51tko" path="res://utils/debug.tscn" id="2_0ffp6"]
+[ext_resource type="PackedScene" uid="uid://brkh8s7pyr8sh" path="res://entities/grab_point.tscn" id="3_sf248"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lewop"]
+size = Vector2(321, 1708)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdv0i"]
+size = Vector2(1180, 344)
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("1_r8tj6")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(32, 320)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(-151, -519)
+shape = SubResource("RectangleShape2D_lewop")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1121, 325)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(122.5, -528)
+shape = SubResource("RectangleShape2D_lewop")
+
+[node name="BottomWall" type="StaticBody2D" parent="."]
+position = Vector2(620, 371)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+position = Vector2(-43, 397)
+shape = SubResource("RectangleShape2D_wdv0i")
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+position = Vector2(620, -1024)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2(-43, 0)
+shape = SubResource("RectangleShape2D_wdv0i")
+
+[node name="PlayerNew" parent="." instance=ExtResource("1_xsejp")]
+position = Vector2(512, 218)
+
+[node name="GrabPoint" parent="." instance=ExtResource("3_sf248")]
+position = Vector2(752, 374)
+
+[node name="GrabPoint2" parent="." instance=ExtResource("3_sf248")]
+position = Vector2(310, 332)
+
+[node name="GrabPoint3" parent="." instance=ExtResource("3_sf248")]
+position = Vector2(314, 100)
+
+[node name="GrabPoint4" parent="." instance=ExtResource("3_sf248")]
+position = Vector2(765, 96)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Debug" parent="CanvasLayer/MarginContainer" instance=ExtResource("2_0ffp6")]
+layout_mode = 2

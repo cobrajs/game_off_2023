@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://brkh8s7pyr8sh"]
+
+[ext_resource type="Script" path="res://entities/grab_point.gd" id="1_wg22n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_djl2t"]
+radius = 30.0
+
+[node name="GrabPoint" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_wg22n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_djl2t")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
