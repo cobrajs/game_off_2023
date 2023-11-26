@@ -1,15 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://bw0tpgb7sg8ye"]
+[gd_scene load_steps=10 format=3 uid="uid://bw0tpgb7sg8ye"]
 
 [ext_resource type="Script" path="res://scenes/game_scene.gd" id="1_r8tj6"]
-[ext_resource type="PackedScene" uid="uid://bgu56l5reo6gf" path="res://entities/player_new.tscn" id="1_xsejp"]
+[ext_resource type="PackedScene" uid="uid://bgu56l5reo6gf" path="res://entities/player.tscn" id="1_xsejp"]
 [ext_resource type="PackedScene" uid="uid://begr2phx51tko" path="res://utils/debug.tscn" id="2_0ffp6"]
 [ext_resource type="PackedScene" uid="uid://brkh8s7pyr8sh" path="res://entities/grab_point.tscn" id="3_sf248"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lewop"]
-size = Vector2(321, 1708)
+size = Vector2(321, 2871)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wdv0i"]
-size = Vector2(1180, 344)
+size = Vector2(3136, 344)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bmlgg"]
+size = Vector2(50, 50)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xpo06"]
+texture = SubResource("PlaceholderTexture2D_bmlgg")
+
+[sub_resource type="TileSet" id="TileSet_g2wpu"]
+sources/0 = SubResource("TileSetAtlasSource_xpo06")
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_r8tj6")
@@ -20,7 +29,7 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
-position = Vector2(-151, -519)
+position = Vector2(-842, -1118)
 shape = SubResource("RectangleShape2D_lewop")
 
 [node name="RightWall" type="StaticBody2D" parent="."]
@@ -29,7 +38,7 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
-position = Vector2(122.5, -528)
+position = Vector2(871, -1123)
 shape = SubResource("RectangleShape2D_lewop")
 
 [node name="BottomWall" type="StaticBody2D" parent="."]
@@ -38,7 +47,7 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
-position = Vector2(-43, 397)
+position = Vector2(-25, 397)
 shape = SubResource("RectangleShape2D_wdv0i")
 
 [node name="TopWall" type="StaticBody2D" parent="."]
@@ -47,27 +56,30 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
-position = Vector2(-43, 0)
+position = Vector2(-7, -1262)
 shape = SubResource("RectangleShape2D_wdv0i")
 
 [node name="PlayerNew" parent="." instance=ExtResource("1_xsejp")]
 position = Vector2(512, 218)
 
 [node name="GrabPoint" parent="." instance=ExtResource("3_sf248")]
-position = Vector2(752, 374)
+position = Vector2(1296, 86)
 
 [node name="GrabPoint2" parent="." instance=ExtResource("3_sf248")]
-position = Vector2(310, 332)
+position = Vector2(-182, -120)
 
 [node name="GrabPoint3" parent="." instance=ExtResource("3_sf248")]
-position = Vector2(314, 100)
+position = Vector2(86, 140)
 
 [node name="GrabPoint4" parent="." instance=ExtResource("3_sf248")]
-position = Vector2(765, 96)
+position = Vector2(874, -118)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.75, 0.75)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_vertical_offset = -0.57
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -86,3 +98,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="Debug" parent="CanvasLayer/MarginContainer" instance=ExtResource("2_0ffp6")]
 layout_mode = 2
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_g2wpu")
+format = 2

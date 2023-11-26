@@ -1,33 +1,71 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpks65hbnb0d3"]
+[gd_scene load_steps=6 format=3 uid="uid://bgu56l5reo6gf"]
 
 [ext_resource type="Script" path="res://entities/player.gd" id="1_rkm7f"]
-[ext_resource type="PackedScene" uid="uid://becckx1i22vqj" path="res://entities/leg.tscn" id="2_tj500"]
+[ext_resource type="Texture2D" uid="uid://dcb2rjbg1ij3d" path="res://assets/jump_bot_small.png" id="2_4cuj7"]
+[ext_resource type="PackedScene" uid="uid://chfnplgiaymw2" path="res://entities/endpoint.tscn" id="3_d2ec8"]
+[ext_resource type="PackedScene" uid="uid://bcxchvnyvkgtr" path="res://entities/limb.tscn" id="4_lwulf"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tx2we"]
-radius = 42.0
-height = 118.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0ucl"]
+size = Vector2(157, 134)
 
 [node name="Player" type="RigidBody2D"]
-collision_mask = 0
-mass = 0.01
+collision_mask = 12
+continuous_cd = 2
+max_contacts_reported = 2
+contact_monitor = true
 lock_rotation = true
+freeze_mode = 1
 script = ExtResource("1_rkm7f")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_tx2we")
+[node name="RightLeg" parent="." instance=ExtResource("4_lwulf")]
+position = Vector2(63, 48)
+rotation = -0.785397
+extended = true
 
-[node name="LeftLeg" parent="." instance=ExtResource("2_tj500")]
-position = Vector2(-23, 39)
-rotation = 0.523598
-collision_layer = 4
-collision_mask = 8
-lock_rotation = true
-thrust = Vector2(-100, 300)
+[node name="LeftLeg" parent="." instance=ExtResource("4_lwulf")]
+position = Vector2(-60, 48)
+rotation = 0.785397
+extended = true
 
-[node name="RightLeg" parent="." instance=ExtResource("2_tj500")]
-position = Vector2(23, 39)
-rotation = -0.523598
-collision_layer = 4
-collision_mask = 8
-lock_rotation = true
-thrust = Vector2(100, 300)
+[node name="LeftArm" parent="." instance=ExtResource("4_lwulf")]
+position = Vector2(-60, -44)
+rotation = 2.35619
+extended = true
+
+[node name="RightArm" parent="." instance=ExtResource("4_lwulf")]
+position = Vector2(60, -44)
+rotation = 3.92699
+extended = true
+
+[node name="RightHand" parent="." instance=ExtResource("3_d2ec8")]
+position = Vector2(90, -75)
+rotation = 0.785398
+side = "right"
+
+[node name="RightFoot" parent="." instance=ExtResource("3_d2ec8")]
+position = Vector2(90, 75)
+rotation = -0.785398
+type = "foot"
+side = "right"
+
+[node name="LeftFoot" parent="." instance=ExtResource("3_d2ec8")]
+position = Vector2(-90, 75)
+rotation = 0.785398
+type = "foot"
+
+[node name="LeftHand" parent="." instance=ExtResource("3_d2ec8")]
+position = Vector2(-90, -75)
+rotation = 5.49779
+
+[node name="Body" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w0ucl")
+
+[node name="Sprite2D" type="Sprite2D" parent="Body"]
+position = Vector2(0, -0.5)
+texture = ExtResource("2_4cuj7")
+region_enabled = true
+region_rect = Rect2(420, 108, 182, 148)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+
+[connection signal="grab" from="." to="." method="_on_grab"]

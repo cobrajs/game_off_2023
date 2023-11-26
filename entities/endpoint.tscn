@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://chfnplgiaymw2"]
+[gd_scene load_steps=4 format=3 uid="uid://chfnplgiaymw2"]
 
-[ext_resource type="Script" path="res://entities/endpoint.gd" id="1_gnhyj"]
+[ext_resource type="Script" path="res://entities/endpoint.gd" id="1_62s4l"]
+[ext_resource type="Texture2D" uid="uid://dcb2rjbg1ij3d" path="res://assets/jump_bot_small.png" id="2_scqyq"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ih5u3"]
-radius = 15.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_81d5s"]
+radius = 25.0
 
 [node name="Endpoint" type="CollisionShape2D"]
-position = Vector2(75, 80)
-shape = SubResource("CircleShape2D_ih5u3")
-script = ExtResource("1_gnhyj")
+shape = SubResource("CircleShape2D_81d5s")
+script = ExtResource("1_62s4l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_scqyq")
+region_enabled = true
+region_rect = Rect2(83, 8, 63, 62)
